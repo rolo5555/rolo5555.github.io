@@ -1,0 +1,101 @@
+# Project information
+site_name: rolo5555
+site_url:   https://rolo5555.github.io/
+site_author: Rolando Cabrera
+site_description: >-
+  Simple explanation of my projects
+
+# Repository
+repo_name: rolo5555/rolo5555.github.io
+repo_url: https://github.com/rolo5555/rolo5555.github.io
+
+# Page tree
+nav:
+  - Home: landing.md
+  - Blog:
+    - blog/index.md
+  - About me: index.md
+
+# Configuration
+theme:
+  custom_dir: material/overrides
+  favicon: assets/logo.png  
+  name: material
+  language: en
+  font:   
+    text: Roboto
+    code: Roboto Mono
+  logo: assets/logo.png
+  palette: 
+  - scheme: default
+    toggle:
+      icon: material/toggle-switch-off-outline
+      name: Switch to dark mode
+    primary: blue
+    accent: purple
+  - scheme: slate
+    toggle:
+      icon: material/toggle-switch
+      name: Switch to light mode
+    primary: blue
+    accent: lime
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.code.select
+    # - content.footnote.tooltips
+    # - content.tabs.link
+    - content.tooltips
+    - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    - navigation.expand
+    # - navigation.tabs.sticky  
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+
+# Additional configuration
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/rolo5555
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/rcabrerablanch/
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/cabrerarolo/
+    - icon: simple/buymeacoffee
+      link: https://www.buymeacoffee.com/rolo5555 
+
+# Plugins
+plugins:
+  - search
+  - blog:
+      archive_date_format: MMMM yyyy
+      categories_allowed:
+        - Terraform
+        - DevSecOps
+        - Kubernetes
+        - Cloud
+        - category1
+        - category2 
+  - social:
+      cards: false
+
+# Copyright
+copyright: Copyright &copy; 2024 Made with ❤️ by Rolando Cabrera

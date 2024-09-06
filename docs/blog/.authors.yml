@@ -1,0 +1,9 @@
+authors:
+  team:
+    name: admin
+    description: admin
+    avatar: ./assets/admin.jpg
+  rolo:
+    name: Rolando Cabrera
+    description: Creator
+    avatar: ./assets/rolando.jpeg

@@ -1,0 +1,5 @@
+size: { width: 1200, height: 630 }
+
+layers:
+  - background:
+    image: layouts/1.jpg
