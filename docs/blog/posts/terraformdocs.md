@@ -1,5 +1,4 @@
 ---
-draft: true  
 date: 2024-09-10  
 categories:
 - Terraform  
