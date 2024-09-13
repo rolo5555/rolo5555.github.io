@@ -1,6 +1,5 @@
 ---
 comments: true
-
 ---
 
 # Welcome to My Personal Blog!

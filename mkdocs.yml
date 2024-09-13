@@ -47,10 +47,9 @@ theme:
     - content.code.copy
     # - content.code.select
     # - content.footnote.tooltips
-    # - content.tabs.link
+    - content.tabs.link
     - content.tooltips
     - header.autohide
-    # - navigation.expand
     - navigation.footer
     - navigation.indexes
     - navigation.instant
@@ -60,7 +59,7 @@ theme:
     - navigation.sections
     - navigation.tabs
     - navigation.expand
-    # - navigation.tabs.sticky  
+    # - navigation.tabs.sticky
     - navigation.top
     - navigation.tracking
     - search.highlight
@@ -81,6 +80,8 @@ extra:
       link: https://www.instagram.com/cabrerarolo/
     - icon: simple/buymeacoffee
       link: https://www.buymeacoffee.com/rolo5555 
+    - icon: simple/credly
+      link: https://www.credly.com/users/rolando-cabrera-blanch.680d4ee3
 
 # Plugins
 plugins:
