@@ -63,16 +63,15 @@ kubectl logs kube-bench-j76s9
 
 The logs will contain a detailed list of recommendations, outlining the identified security issues and how to address them. You can see an example of the full output in this [Gist](https://gist.github.com/rolo5555/6d96f59f2d7d390adfd99958e688ee04).
 
-<iframe src="https://gist.github.com/rolo5555/6d96f59f2d7d390adfd99958e688ee04" width="100%" height="500px" style="border: 1px solid #ddd;"></iframe>
-
-
 Within the output, each problematic area is explained, and kube-bench offers solutions for improving security on the worker nodes.
 
 ### Master Node Auditing
-For auditing the master nodes (control plane), I used a different script designed specifically for the master node configuration. You can find this script here.
+To audit the master nodes (control plane), I used a script specifically designed for the master node configuration. Follow these steps to run the audit:
 
 ```bash
+# Download the master node job configuration
 $ curl -O https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job-master.yaml
+
 $ kubectl apply -f job-master.yaml
 job.batch/kube-bench created
 
@@ -91,19 +90,4 @@ kubectl logs kube-bench-j76s9
 [INFO] 1.1 Control Plane Node Configuration Files
 ...
 ```
-
-Full output can be viewed https://gist.github.com/rolo5555/0bc6ab77eaabce438d3a6f90f848c40e
-
-<!-- Each of these scripts ensures that the relevant components of the cluster are checked according to the CIS benchmark
-
-https://github.com/aquasecurity/kube-bench/blob/main/docs/running.md
-
-There are several ways of runninng it and its depends specifically on which cluster what you will try to do that. 
-
-As example we have deployed a cluster using [kops tool](https://kops.sigs.k8s.io/) on [AWS](https://kops.sigs.k8s.io/getting_started/aws/)
-
-The way that I choose that to  
-for worker node 
-https://gist.github.com/rolo5555/6d96f59f2d7d390adfd99958e688ee04
-
-for master node
+The logs will contain a detailed list of recommendations, outlining the identified security issues and how to address them. You can see an example of the full output in this [Gist](https://gist.github.com/rolo5555/0bc6ab77eaabce438d3a6f90f848c40e).
