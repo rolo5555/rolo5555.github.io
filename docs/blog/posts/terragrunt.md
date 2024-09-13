@@ -182,35 +182,6 @@ This approach ensures that your provider configuration is consistent and automat
 
 By centralizing provider configurations with Terragrunt, you reduce the risk of errors from manual updates and ensure that any changes to provider settings are automatically applied across all modules.
 
-<!-- ## Keeping Your Terraform CLI Arguments DRY
-Managing multiple .tfvars files and passing them as arguments on the CLI can be cumbersome. Terragrunt lets you automate this:
-
-
-```bash
-# stage/terragrunt.hcl
-generate "provider" {
-  path = "provider.tf"
-  if_exists = "overwrite_terragrunt"
-  contents = <<EOF
-provider "aws" {
-  assume_role {
-    role_arn = "arn:aws:iam::0123456789:role/terragrunt"
-  }
-}
-EOF
-}
-```
-This instructs Terragrunt to create the file provider.tf in the working directory (where Terragrunt calls tofu/terraform) before it calls any of the Terraform commands (e.g plan, apply, validate, etc). This allows you to inject this provider configuration in all the modules that includes the root file without having to define them in the underlying modules.
-
-When you run terragrunt plan or terragrunt apply, you can see that this file is created in the module working directory:
-
-```bash 
-$ cd stage/mysql
-$ terragrunt apply
-$ find . -name "provider.tf"
-.terragrunt-cache/some-unique-hash/provider.tf
-``` -->
-
 ## Installation     
 For installation instructions, please refer to the [official documentation](https://terragrunt.gruntwork.io/docs/getting-started/install/)
 

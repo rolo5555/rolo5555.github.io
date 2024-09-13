@@ -90,11 +90,8 @@ plugins:
       archive_date_format: MMMM yyyy
       categories_allowed:
         - Terraform
-        - DevSecOps
         - Kubernetes
         - Cloud
-        - category1
-        - category2 
   - social:
       cards: false
 
