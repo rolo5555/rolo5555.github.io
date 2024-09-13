@@ -6,7 +6,6 @@ categories:
 readtime: 10  
 authors:
 - rolo
-draft: true
 ---
 
 # `Kube-bench`: Automating Kubernetes Security Checks
@@ -23,12 +22,6 @@ One tool that automates this important process is `kube-bench`. It runs checks a
 Whether you're running Kubernetes in production, or setting up a development cluster, regular use of kube-bench helps ensure that your deployments meet security standards.
 
 For more details and to start using kube-bench, visit the [official GitHub repository](https://github.com/aquasecurity/kube-bench).
-
-<!-- Comes from the Inniciative of center for internet security (CIS) organism which produces a  Benchmark w/ the community consensus to provide [secure configuration guidelines for Kubernetes](https://www.cisecurity.org/benchmark/kubernetes)
-
-Is a tool that checks whether Kubernetes is deployed securely by running the checks documented in the CIS Kubernetes Benchmark.
-
-For more specifications please refer to https://github.com/aquasecurity/kube-bench -->
 
 ## Running kube-bench on Kubernetes Clusters
 The `kube-bench` tool can be executed in various ways depending on your Kubernetes cluster setup. It ensures that your Kubernetes deployment aligns with the CIS Kubernetes Benchmark, which provides security guidelines.
@@ -64,6 +57,9 @@ kubectl logs kube-bench-j76s9
 The logs will contain a detailed list of recommendations, outlining the identified security issues and how to address them. You can see an example of the full output in this [Gist](https://gist.github.com/rolo5555/6d96f59f2d7d390adfd99958e688ee04).
 
 Within the output, each problematic area is explained, and kube-bench offers solutions for improving security on the worker nodes.
+
+<iframe src="https://gist.github.com/rolo5555/6d96f59f2d7d390adfd99958e688ee04" width="100%" height="500px" style="border: 1px solid #ddd;"></iframe>
+
 
 ### Master Node Auditing
 To audit the master nodes (control plane), I used a script specifically designed for the master node configuration. Follow these steps to run the audit:
