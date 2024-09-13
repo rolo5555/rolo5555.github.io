@@ -1,5 +1,4 @@
 ---
-draft: true  
 date: 2024-09-13
 categories:
 - Kubernetes  
@@ -59,7 +58,6 @@ The logs will contain a detailed list of recommendations, outlining the identifi
 Within the output, each problematic area is explained, and kube-bench offers solutions for improving security on the worker nodes.
 
 <iframe src="https://gist.github.com/rolo5555/6d96f59f2d7d390adfd99958e688ee04" width="100%" height="500px" style="border: 1px solid #ddd;"></iframe>
-
 
 ### Master Node Auditing
 To audit the master nodes (control plane), I used a script specifically designed for the master node configuration. Follow these steps to run the audit:
