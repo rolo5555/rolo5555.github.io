@@ -92,6 +92,10 @@ plugins:
         - Terraform
         - Kubernetes
         - Cloud
+        - Memes
+        - Linux
+        - Devops
+        - CI/CD
   - social:
       cards: false
 
