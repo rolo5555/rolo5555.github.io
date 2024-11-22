@@ -2,11 +2,11 @@
 date: 2024-09-16 
 categories:
 - Cloud  
-readtime: 3  
+readtime: 15 
 authors:
-- team
+- rolo
 --- 
-# Understanding the problem and the benefit of using this tools
+# Introduction to Powertools for AWS Lambda 
 Building serverless applications with AWS Lambda offers scalability, cost-efficiency, and reduced operational overhead. However, as these applications grow, so do the challenges.
 
 Have you struggled to pinpoint why a Lambda function slowed down or why your app returns intermittent errors? Debugging cryptic logs or understanding service interactions across distributed systems can be time-consuming and frustrating.
