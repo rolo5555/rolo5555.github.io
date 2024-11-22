@@ -56,3 +56,48 @@ A runner is a server that executes your workflows. [GitHub provides runners](htt
 
 You also have the option to host your own runner if you need a specific OS or hardware configuration.
 
+
+## Example of Usage
+
+Here's an example of a pipeline configuration for deploying a static website using GitHub Actions. This pipeline includes a `workflow` that automates the deployment process whenever code is pushed to the `main` or `master` branch.
+
+The workflow is triggered by two specific events: a push to the `main` or `master` branch. When triggered, the pipeline runs a `job` with several `steps`, each using `actions` to configure credentials, fetch the code, install dependencies, and deploy the website.
+
+```yaml
+#.github/workflows/action.yml
+name: CD
+on:
+  push:
+    branches:
+      - master
+      - main
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Git Credentials
+        run: |
+          git config user.name <cool_action_name>
+          git config user.email <cool_action_email>
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install mkdocs-material[imaging] && pip install mkdocs-material
+      - run: mkdocs gh-deploy --force
+```
+
+For more examples and detailed information, check the [GitHub Actions Documentation](https://docs.github.com/en/actions/use-cases-and-examples/creating-an-example-workflow).
+
+
+## Conclusion
+This post aimed to introduce the basics of CI/CD and demonstrate how it can streamline your development process. By automating workflows like the one shown above, you can improve the speed and reliability of your deployments. CI/CD isn't just for large teams—it's a valuable tool for developers of all sizes and stages to enhance code quality and simplify deployment :). 
