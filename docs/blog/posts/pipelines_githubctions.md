@@ -21,20 +21,19 @@ With CD, the challenge is automating software updates. In a typical CD process, 
 
 ## Cast of characters 
 ### Workflows
-A workflow is a configurable automated process consisting of one or more jobs. These workflows are defined in .github/workflows and can be triggered by events (such as a push or pull request) or run on a set schedule. Common workflows include:
+A workflow is a configurable automated process consisting of one or more jobs. These workflows are defined in `.github/workflows` and can be triggered by a variety of events. Common workflows include:
 
-Building and testing pull requests.
-Deploying applications after a release.
-Automatically adding labels to new issues.
-You can even reference one workflow from within another for better reusability.
+- Building and testing pull requests.
+- Deploying applications after a release.
+- Automatically adding labels to new issues.
 
 ### Events
 Events are activities in a repository that trigger workflows. Examples include:
 
-Pushing code.
-Opening a pull request.
-Creating a new issue.
-Workflows can also be triggered manually or on a predefined schedule. For a full list, see GitHub’s documentation on Events that trigger workflows.
+- Pushing code.
+- Opening a pull request.
+- Creating a new issue.
+- Workflows can also be triggered manually or on a predefined schedule. For a full list, see [GitHub’s documentation on Events](https://docs.github.com/en/rest/using-the-rest-api/github-event-types?apiVersion=2022-11-28) that trigger workflows.
 
 ### Jobs
 A job is a collection of steps executed on the same runner. Each step can either be a shell script or an action that is part of the workflow. Steps are executed in order, and you can share data between them.
@@ -44,15 +43,15 @@ Jobs run in parallel unless configured otherwise, meaning independent jobs can s
 ### Actions
 An action is a reusable application that performs specific tasks. Actions help reduce repetitive code in workflows. Common actions include:
 
-Pulling your Git repository.
-Setting up toolchains for building.
-Authenticating with cloud providers.
+- Pulling your Git repository.
+- Setting up toolchains for building.
+- Authenticating with cloud providers.
+
 You can write custom actions or use those available in the GitHub Marketplace.
 
 ### Runners
-A runner is a server that executes your workflows. GitHub provides runners for Ubuntu, Windows, and macOS, which run in isolated virtual machines.
+A runner is a server that executes your workflows. [GitHub provides runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners) for Ubuntu, Windows, and macOS, which run in isolated virtual machines.
 
 You also have the option to host your own runner if you need a specific OS or hardware configuration.
 
-For more information, see GitHub’s guide on self-hosted runners.
 
