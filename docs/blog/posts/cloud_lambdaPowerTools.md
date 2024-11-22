@@ -29,77 +29,134 @@ In a serverless environment, traditional monitoring methods fall short. You need
 ### **Core Features**
 
 1. **Logging**:
-   - Provides opinionated, structured JSON logging out of the box.
-   - Automatically captures contextual information, such as Lambda function name, version, and AWS request ID.
-   - Logs can include custom metadata, making them easier to analyze in tools like CloudWatch, Elasticsearch, or Splunk.
+- Provides opinionated, structured JSON logging out of the box.
+- Automatically captures contextual information, such as Lambda function name, version, and AWS request ID.
+- Logs can include custom metadata, making them easier to analyze in tools like CloudWatch, Elasticsearch, or Splunk.
 
-   **Example**:
-   ```python
-   from aws_lambda_powertools.logging import Logger
+**Example**:
+```python
+from aws_lambda_powertools.logging import Logger
 
-   logger = Logger()
-   logger.info("This is a structured log", extra={"user_id": "12345"})
-   ```
+logger = Logger()
+logger.info("This is a structured log", extra={"user_id": "12345"})
+```
 
-   **Output**:
-   ```json
-   {
-       "level": "INFO",
-       "timestamp": "2024-11-22T10:00:00Z",
-       "message": "This is a structured log",
-       "user_id": "12345",
-       "function_name": "my-function"
-   }
-   ```
+**Output**:
+```json
+{
+    "level": "INFO",
+    "timestamp": "2024-11-22T10:00:00Z",
+    "message": "This is a structured log",
+    "user_id": "12345",
+    "function_name": "my-function"
+}
+```
 
 2. **Metrics**:
-   - Simplifies the creation and publishing of custom metrics to Amazon CloudWatch.
-   - Supports dimensions, namespaces, and multiple metrics in a single Lambda execution.
+- Simplifies the creation and publishing of custom metrics to Amazon CloudWatch.
+- Supports dimensions, namespaces, and multiple metrics in a single Lambda execution.
 
-   **Example**:
-   ```python
-   from aws_lambda_powertools.metrics import Metrics
+**Example**:
+```python
+from aws_lambda_powertools.metrics import Metrics
 
-   metrics = Metrics(namespace="MyApplication", service="PaymentService")
-   metrics.add_metric(name="SuccessfulPayments", unit="Count", value=1)
-   metrics.publish()
-   ```
+metrics = Metrics(namespace="MyApplication", service="PaymentService")
+metrics.add_metric(name="SuccessfulPayments", unit="Count", value=1)
+metrics.publish()
+```
 
 3. **Tracing**:
-   - Provides integration with AWS X-Ray for distributed tracing.
-   - Automatically traces Lambda handler execution and external calls like DynamoDB, S3, or HTTP requests.
+- Provides integration with AWS X-Ray for distributed tracing.
+- Automatically traces Lambda handler execution and external calls like DynamoDB, S3, or HTTP requests.
 
-   **Example**:
-   ```python
-   from aws_lambda_powertools.tracing import Tracer
+**Example**:
+```python
+from aws_lambda_powertools.tracing import Tracer
 
-   tracer = Tracer()
-   
-   @tracer.capture_lambda_handler
-   def handler(event, context):
-       # Traced code
-       pass
-   ```
+tracer = Tracer()
+
+@tracer.capture_lambda_handler
+def handler(event, context):
+    # Traced code
+    pass
+```
 
 4. **Validation**:
-   - Helps validate input events using **Pydantic models** or JSON schemas.
-   - Reduces boilerplate and ensures robust input validation.
+- Helps validate input events using **Pydantic models** or JSON schemas.
+- Reduces boilerplate and ensures robust input validation.
 
-   **Example**:
-   ```python
-   from aws_lambda_powertools.utilities.validation import validate
-   from schema import MY_EVENT_SCHEMA
+**Example**:
+```python
+from aws_lambda_powertools.utilities.validation import validate
+from schema import MY_EVENT_SCHEMA
 
-   @validate(event_schema=MY_EVENT_SCHEMA)
-   def handler(event, context):
-       # Validated input
-       pass
-   ```
+@validate(event_schema=MY_EVENT_SCHEMA)
+def handler(event, context):
+    # Validated input
+    pass
+```
+5. **Parameters**:
+- Simplifies the retrieval of parameters from **AWS Systems Manager Parameter Store**, **AWS Secrets Manager**, **AWS AppConfig**, **Amazon DynamoDB**, and custom providers.
+- Supports caching and transforming parameter values (JSON and base64), improving performance and flexibility.
 
-5. **Other Utilities**:
+**Example**:
+```python
+from aws_lambda_powertools.utilities.parameters import get_parameter
+
+# Retrieve a parameter from AWS Secrets Manager
+parameter = get_parameter(name="my-secret", provider="SecretsManager")
+
+# Retrieve multiple parameters with caching
+parameters = get_parameter(names=["param1", "param2"], cache=True)
+
+# Retrieve and decode a base64 parameter
+base64_param = get_parameter(name="my-base64-param", base64_decode=True)
+```
+
+6. **Event Source Data Classes**:
+- Provides self-describing classes for common Lambda event sources, helping with type hinting, code completion, and decoding nested fields.
+- Simplifies working with event data by including docstrings for fields and providing helper functions for easy deserialization.
+
+**Example**:
+```python
+from aws_lambda_powertools.utilities.event_handler import event_source
+
+# Event source for S3
+from aws_lambda_powertools.utilities.event_source import S3Event
+
+def handler(event, context):
+    s3_event = S3Event(event)  # Type hinting and auto-completion
+    
+    # Access event fields with decoding/deserialization
+    bucket_name = s3_event.records[0].s3.bucket.name
+    object_key = s3_event.records[0].s3.object.key
+    print(f"Bucket: {bucket_name}, Object Key: {object_key}")
+```
+
+
+7. **Parser (Pydantic)**:
+- Simplifies data parsing and validation using **Pydantic** to define data models, parse Lambda event payloads, and extract only the needed data.
+- Offers runtime type checking and user-friendly error messages for common AWS event sources.
+
+**Example**:
+```python
+from aws_lambda_powertools.utilities.parser import parse
+from pydantic import BaseModel
+
+# Define a data model using Pydantic
+class MyEventModel(BaseModel):
+    user_id: int
+    user_name: str
+
+@parse(model=MyEventModel)
+def handler(event, context):
+    # Access validated and parsed event data
+    print(f"User ID: {event.user_id}, User Name: {event.user_name}")
+```
+
+8. **Other Utilities**:
    - **Feature Flags**: Manage runtime feature toggles using a configuration file or DynamoDB.
    - **Event Parser**: Parse and validate common AWS event formats (e.g., DynamoDB, S3).
-   - **Parameters Utility**: Fetch and cache configurations from AWS Systems Manager Parameter Store, Secrets Manager, or DynamoDB.
 
 ---
 
@@ -110,13 +167,6 @@ In a serverless environment, traditional monitoring methods fall short. You need
 3. **Improved Observability**: Standardizes logs, metrics, and traces for better debugging and monitoring.
 4. **Production-Ready**: Simplifies common patterns required in serverless applications, making them easier to maintain.
 5. **Extensibility**: Modular design allows you to include only the features you need.
-
----
-
-### **When to Use It?**
-- **Observability First**: When you want structured logs, CloudWatch metrics, and distributed tracing without reinventing the wheel.
-- **Large-Scale Serverless Apps**: Ideal for managing complexity in production workloads with multiple AWS services.
-- **Best Practices Enforcement**: If you’re focused on building reliable, maintainable, and compliant serverless applications.
 
 ---
 
