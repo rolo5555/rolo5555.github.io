@@ -96,6 +96,7 @@ plugins:
         - Linux
         - Devops
         - CI/CD
+        - Engineering
   - social:
       cards: false
 
