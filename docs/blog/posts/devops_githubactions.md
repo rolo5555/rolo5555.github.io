@@ -1,7 +1,7 @@
 ---
 date: 2024-09-20  
 categories:
-- CI/CD  
+- Devops
 readtime: 20  
 authors:
 - rolo
